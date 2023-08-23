@@ -1,0 +1,23 @@
+.question-container {
+  display: flex;
+  flex-direction: column;
+}
+.answer-choice {
+  width: 50vw;
+  height: 8vh;
+  margin: 8px;
+  border-radius: 8px;
+  background-color: whitesmoke;
+  box-shadow: 2px 2px #614bc3;
+  border-color: #614bc3;
+}
+.question-order {
+  margin: 8px;
+}
+.question-content {
+  margin-top: 8px;
+}
+.answer-choice:hover {
+  cursor: pointer;
+  box-shadow: 4px 4px #614bc3;
+}

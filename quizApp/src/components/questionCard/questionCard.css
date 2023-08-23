@@ -1,0 +1,27 @@
+.question-main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50vw;
+  border: 1px solid;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px #614bc3;
+}
+#progress-bar {
+  width: 40vw;
+}
+.next-btn {
+  margin-top: 8px;
+  width: 25vw;
+  height: 8vh;
+  border-radius: 8px;
+  background-color: whitesmoke;
+  box-shadow: 2px 2px #614bc3;
+  border-color: #614bc3;
+}
+.next-btn:hover {
+  cursor: pointer;
+  box-shadow: 4px 4px #614bc3;
+}
