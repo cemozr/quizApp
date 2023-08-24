@@ -25,3 +25,10 @@
   cursor: pointer;
   box-shadow: 4px 4px #614bc3;
 }
+.score-order {
+  width: 100%;
+  float: left;
+  font-size: large;
+  font-weight: bolder;
+  margin-top: 10px;
+}
