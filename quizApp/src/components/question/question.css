@@ -12,6 +12,12 @@
   box-shadow: 2px 2px #614bc3;
   border-color: #614bc3;
 }
+.true-answer {
+  background-color: greenyellow;
+}
+.false-answer {
+  background-color: red;
+}
 .question-order {
   margin: 8px;
 }

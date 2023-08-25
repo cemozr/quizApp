@@ -28,6 +28,9 @@ function App() {
         ["&eacute;", "É"],
         ["&ldquo;", "“"],
         ["&rdquo;", "”"],
+        ["&lt;", "<"],
+        ["&gt;", ">"],
+        ["&Uuml;", "Ü"],
       ];
 
       response.results.map((dt) => {
