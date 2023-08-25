@@ -56,7 +56,7 @@ function App() {
         //newShuffledList = [["hp","dell","monster","casper"], ["2021","2022","1998","9122"]]
       });
       setShuffledList(newShuffledList);
-      console.log(response.results);
+      // console.log(response.results);
       setQuestionList(response.results);
       setIsLoading(false);
     } catch (error) {

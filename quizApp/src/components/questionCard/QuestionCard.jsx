@@ -26,7 +26,11 @@ function QuestionCard({ questionList, shuffledList }) {
     setQuestion(questionList[index + 1]);
     setShuffled(shuffledList[index + 1]);
   };
-
+  const successful = () => {
+    setIndex(index + 1);
+    setQuestion(questionList[index + 1]);
+    setShuffled(shuffledList[index + 1]);
+  };
   return (
     <div className="question-main-container">
       <div className="countdown-container">
@@ -36,7 +40,12 @@ function QuestionCard({ questionList, shuffledList }) {
         <span>{index + 1}</span>
         <span> /{questionList.length}</span>
       </div>
-      <Question question={question} shuffled={shuffled} questionOrder={index} />
+      <Question
+        question={question}
+        shuffled={shuffled}
+        questionOrder={index}
+        successful={successful}
+      />
       <div>
         <button onClick={skipHandler} className="next-btn">
           Skip

@@ -1,46 +1,29 @@
 import { useEffect } from "react";
 import { useState } from "react";
 
-function AnswerButtons({ question, shuffled, index }) {
+function AnswerButtons({ question, shuffled, index, successful }) {
   // console.log(shuffled);
-
-  const [correctIndex, setCorrectIndex] = useState(-1);
-  const [answered, setAnswered] = useState(-1);
-  const wrongAnswers = question.incorrect_answers;
+  // console.log(question);
   const trueAnswer = question.correct_answer;
-  console.log(trueAnswer);
-  for (let i = 0; i < shuffled.length; ++i) {
-    if (shuffled[i] == trueAnswer) {
-      if (correctIndex != i) {
-        setCorrectIndex(i);
-      }
-
-      // console.log(i);
-      break;
-    }
-  }
-
-  const onClickHandler = (event) => {
-    console.log(event.target.getAttribute("value"));
-    setAnswered(event.target.getAttribute("value"));
+  const [isSkipped, setIsSkipped] = useState(false);
+  // useEffect(() => {}, [isSkipped]);
+  const answerCheck = (e) => {
+    e.target.value == trueAnswer && setTimeout(successful, 3000);
+    e.target.value == trueAnswer
+      ? e.target.classList.add("true-answer")
+      : e.target.classList.add("false-answer");
+    setIsSkipped(true);
+    isSkipped && e.target.classList.remove("true-answer"),
+      e.target.classList.remove("false-answer");
   };
-
-  useEffect(() => {}, [answered]);
-
   return (
     <>
       {shuffled.map((choice, i) => {
         return (
           <button
-            className={
-              answered != i
-                ? "answer-choice"
-                : answered == correctIndex
-                ? "answer-choice true-answer"
-                : "answer-choice false-answer"
-            }
-            onClick={onClickHandler}
-            value={i}
+            onClick={answerCheck}
+            className="answer-choice"
+            value={choice}
             key={i}
           >
             {choice}
