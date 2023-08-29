@@ -9,6 +9,7 @@ function QuestionCard({ questionList, shuffledList }) {
   const [index, setIndex] = useState(0);
   const [question, setQuestion] = useState("");
   const [shuffled, setShuffled] = useState([]);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     if (questionList.length > 0) {
@@ -18,7 +19,7 @@ function QuestionCard({ questionList, shuffledList }) {
   }, [questionList, index]);
 
   const time = new Date();
-  time.setSeconds(time.getSeconds() + 30);
+  time.setSeconds(time.getSeconds() + 5);
 
   const skipHandler = () => {
     setIndex(index + 1);
@@ -30,11 +31,26 @@ function QuestionCard({ questionList, shuffledList }) {
     setIndex(index + 1);
     setQuestion(questionList[index + 1]);
     setShuffled(shuffledList[index + 1]);
+    setScore(score + 1);
   };
+  const unsuccessful = () => {
+    setIndex(index + 1);
+    setQuestion(questionList[index + 1]);
+    setShuffled(shuffledList[index + 1]);
+    setScore(score - 1);
+  };
+  const func = (resFunc) => {
+    resFunc();
+  };
+  console.log(score);
   return (
     <div className="question-main-container">
       <div className="countdown-container">
-        <MyTimer expiryTimestamp={time} />
+        <MyTimer
+          expiryTimestamp={time}
+          unsuccessful={unsuccessful}
+          func={func}
+        />
       </div>
       <div className="score-order">
         <span>{index + 1}</span>
@@ -45,6 +61,8 @@ function QuestionCard({ questionList, shuffledList }) {
         shuffled={shuffled}
         questionOrder={index}
         successful={successful}
+        unsuccessful={unsuccessful}
+        resFunc={func}
       />
       <div>
         <button onClick={skipHandler} className="next-btn">

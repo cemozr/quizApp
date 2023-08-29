@@ -1,6 +1,13 @@
 import AnswerButtons from "../answerButtons/AnswerButtons";
 import "./question.css";
-function Question({ question, shuffled, index, successful }) {
+function Question({
+  question,
+  shuffled,
+  index,
+  successful,
+  unsuccessful,
+  func,
+}) {
   return (
     <div className="question-container">
       <p className="question-content">{question.question}</p>
@@ -9,6 +16,8 @@ function Question({ question, shuffled, index, successful }) {
         shuffled={shuffled}
         questionOrder={index}
         successful={successful}
+        unsuccessful={unsuccessful}
+        resFunc={func}
       />
     </div>
   );

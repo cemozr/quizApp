@@ -1,28 +1,39 @@
 import { useEffect } from "react";
 import { useState } from "react";
 
-function AnswerButtons({ question, shuffled, index, successful }) {
+function AnswerButtons({
+  question,
+  shuffled,
+  index,
+  successful,
+  unsuccessful,
+  func,
+}) {
   // console.log(shuffled);
   // console.log(question);
   const trueAnswer = question.correct_answer;
   const [isSkipped, setIsSkipped] = useState(false);
+  const [className, setClassName] = useState("answer-choice");
   // useEffect(() => {}, [isSkipped]);
   const answerCheck = (e) => {
-    e.target.value == trueAnswer && setTimeout(successful, 3000);
+    func();
     e.target.value == trueAnswer
-      ? e.target.classList.add("true-answer")
-      : e.target.classList.add("false-answer");
-    setIsSkipped(true);
-    isSkipped && e.target.classList.remove("true-answer"),
-      e.target.classList.remove("false-answer");
+      ? setTimeout(successful, 3000)
+      : setTimeout(unsuccessful, 3000);
+    e.target.value == trueAnswer
+      ? setClassName("true-answer answer-choice")
+      : setClassName("false-answer answer-choice");
   };
+  useEffect(() => {
+    setClassName("answer-choice");
+  }, [shuffled]);
   return (
     <>
       {shuffled.map((choice, i) => {
         return (
           <button
             onClick={answerCheck}
-            className="answer-choice"
+            className={className}
             value={choice}
             key={i}
           >
