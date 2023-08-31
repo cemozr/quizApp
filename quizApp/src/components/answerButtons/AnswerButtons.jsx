@@ -9,23 +9,18 @@ function AnswerButtons({
   unsuccessful,
   func,
 }) {
-  // console.log(shuffled);
-  // console.log(question);
   const trueAnswer = question.correct_answer;
-  const [isSkipped, setIsSkipped] = useState(false);
-  const [className, setClassName] = useState("answer-choice");
-  // useEffect(() => {}, [isSkipped]);
+
+  const [selectedAnswer, setSelectedAnswer] = useState("");
   const answerCheck = (e) => {
-    func();
+    if (selectedAnswer != "") return;
+    setSelectedAnswer(e.target.value);
     e.target.value == trueAnswer
       ? setTimeout(successful, 3000)
       : setTimeout(unsuccessful, 3000);
-    e.target.value == trueAnswer
-      ? setClassName("true-answer answer-choice")
-      : setClassName("false-answer answer-choice");
   };
   useEffect(() => {
-    setClassName("answer-choice");
+    setSelectedAnswer("");
   }, [shuffled]);
   return (
     <>
@@ -33,7 +28,13 @@ function AnswerButtons({
         return (
           <button
             onClick={answerCheck}
-            className={className}
+            className={
+              selectedAnswer != choice
+                ? "answer-choice"
+                : choice == trueAnswer
+                ? "true-answer answer-choice"
+                : "false-answer answer-choice"
+            }
             value={choice}
             key={i}
           >

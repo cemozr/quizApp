@@ -4,6 +4,9 @@ import QuestionCard from "./components/questionCard/QuestionCard";
 import axios from "axios";
 import { useEffect } from "react";
 import QuestionList from "./components/questionList/QuestionList";
+import { Routes, Route } from "react-router-dom";
+import Menu from "./components/menu/Menu";
+import Score from "./components/score/Score";
 
 function App() {
   const [questionList, setQuestionList] = useState([]);
@@ -67,15 +70,29 @@ function App() {
   useEffect(() => {
     fetchApi();
   }, []);
-
+  const handleScorePage = (finalScore, finalIndex) => {
+    // console.log(`finalScore: ${finalScore}  finalIndex: ${finalIndex} `);
+  };
   return (
     <>
-      {isLoading ? (
-        <h1 className="loading-text">Loading...</h1>
-      ) : (
-        <QuestionCard questionList={questionList} shuffledList={shuffledList} />
-      )}
-      <QuestionList />
+      <Routes>
+        <Route path="/" element={<Menu />} />
+        <Route
+          path="/quiz"
+          element={
+            isLoading ? (
+              <h1 className="loading-text">Loading...</h1>
+            ) : (
+              <QuestionCard
+                questionList={questionList}
+                shuffledList={shuffledList}
+                handleScorePage={handleScorePage}
+              />
+            )
+          }
+        />
+        <Route path="/scorePage" element={<Score />} />
+      </Routes>
     </>
   );
 }

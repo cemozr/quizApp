@@ -4,12 +4,13 @@ import "../question/question.css";
 import { useEffect, useState } from "react";
 import MyTimer from "../timer/Timer";
 
-function QuestionCard({ questionList, shuffledList }) {
+function QuestionCard({ questionList, shuffledList, handleScorePage }) {
   console.log(questionList);
   const [index, setIndex] = useState(0);
   const [question, setQuestion] = useState("");
   const [shuffled, setShuffled] = useState([]);
   const [score, setScore] = useState(0);
+  const [notifier, setNotifier] = useState(0);
 
   useEffect(() => {
     if (questionList.length > 0) {
@@ -19,30 +20,36 @@ function QuestionCard({ questionList, shuffledList }) {
   }, [questionList, index]);
 
   const time = new Date();
-  time.setSeconds(time.getSeconds() + 5);
+  time.setSeconds(time.getSeconds() + 10);
 
   const skipHandler = () => {
     setIndex(index + 1);
     console.log(index);
     setQuestion(questionList[index + 1]);
     setShuffled(shuffledList[index + 1]);
+    setNotifier(notifier + 1);
+  };
+  const func = (resFunc) => {
+    resFunc();
   };
   const successful = () => {
     setIndex(index + 1);
     setQuestion(questionList[index + 1]);
     setShuffled(shuffledList[index + 1]);
     setScore(score + 1);
+    setNotifier(notifier + 1);
   };
   const unsuccessful = () => {
     setIndex(index + 1);
     setQuestion(questionList[index + 1]);
     setShuffled(shuffledList[index + 1]);
     setScore(score - 1);
+    setNotifier(notifier + 1);
   };
-  const func = (resFunc) => {
-    resFunc();
-  };
+
   console.log(score);
+  // console.log(index);
+  handleScorePage(score, index);
   return (
     <div className="question-main-container">
       <div className="countdown-container">
@@ -50,6 +57,8 @@ function QuestionCard({ questionList, shuffledList }) {
           expiryTimestamp={time}
           unsuccessful={unsuccessful}
           func={func}
+          score={score}
+          notifier={notifier}
         />
       </div>
       <div className="score-order">
@@ -62,7 +71,7 @@ function QuestionCard({ questionList, shuffledList }) {
         questionOrder={index}
         successful={successful}
         unsuccessful={unsuccessful}
-        resFunc={func}
+        func={func}
       />
       <div>
         <button onClick={skipHandler} className="next-btn">

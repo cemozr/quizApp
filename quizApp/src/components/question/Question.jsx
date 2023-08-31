@@ -17,7 +17,7 @@ function Question({
         questionOrder={index}
         successful={successful}
         unsuccessful={unsuccessful}
-        resFunc={func}
+        func={func}
       />
     </div>
   );

@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 import { useTimer } from "react-timer-hook";
 
-function MyTimer({ expiryTimestamp, unsuccessful, timeCheck, func }) {
+function MyTimer({
+  expiryTimestamp,
+  unsuccessful,
+  timeCheck,
+  func,
+  score,
+  notifier,
+}) {
   const [isTimeOver, setIsTimeOver] = useState(false);
 
   const {
@@ -22,7 +29,7 @@ function MyTimer({ expiryTimestamp, unsuccessful, timeCheck, func }) {
         console.warn("onExpire called"),
         unsuccessful(),
         restart(expiryTimestamp);
-      console.log(seconds);
+      // console.log(seconds);
     },
   });
 
@@ -30,12 +37,14 @@ function MyTimer({ expiryTimestamp, unsuccessful, timeCheck, func }) {
     restart(expiryTimestamp);
     setIsTimeOver(false);
   };
-  func(res);
+  useEffect(() => {
+    res();
+  }, [notifier]);
   return (
     <progress
       id="progress-bar"
       value={isTimeOver ? res() : seconds}
-      max="5"
+      max="10"
     ></progress>
   );
 }
