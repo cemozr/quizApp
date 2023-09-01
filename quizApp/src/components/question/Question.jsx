@@ -7,17 +7,19 @@ function Question({
   successful,
   unsuccessful,
   func,
+  setIndex,
 }) {
   return (
     <div className="question-container">
-      <p className="question-content">{question.question}</p>
+      <p className="question-content">{index < 10 && question.question}</p>
       <AnswerButtons
         question={question}
         shuffled={shuffled}
-        questionOrder={index}
+        index={index}
         successful={successful}
         unsuccessful={unsuccessful}
         func={func}
+        setIndex={setIndex}
       />
     </div>
   );

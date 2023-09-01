@@ -17,10 +17,11 @@ function QuestionCard({ questionList, shuffledList, handleScorePage }) {
       setQuestion(questionList[index]);
       setShuffled(shuffledList[index]);
     }
+    handleScorePage(score, index);
   }, [questionList, index]);
 
   const time = new Date();
-  time.setSeconds(time.getSeconds() + 10);
+  time.setSeconds(time.getSeconds() + 30);
 
   const skipHandler = () => {
     setIndex(index + 1);
@@ -36,20 +37,20 @@ function QuestionCard({ questionList, shuffledList, handleScorePage }) {
     setIndex(index + 1);
     setQuestion(questionList[index + 1]);
     setShuffled(shuffledList[index + 1]);
-    setScore(score + 1);
+    setScore(score + 10);
     setNotifier(notifier + 1);
   };
   const unsuccessful = () => {
     setIndex(index + 1);
     setQuestion(questionList[index + 1]);
     setShuffled(shuffledList[index + 1]);
-    setScore(score - 1);
+    setScore(score - 5);
     setNotifier(notifier + 1);
   };
 
   console.log(score);
   // console.log(index);
-  handleScorePage(score, index);
+
   return (
     <div className="question-main-container">
       <div className="countdown-container">
@@ -68,10 +69,11 @@ function QuestionCard({ questionList, shuffledList, handleScorePage }) {
       <Question
         question={question}
         shuffled={shuffled}
-        questionOrder={index}
+        index={index}
         successful={successful}
         unsuccessful={unsuccessful}
         func={func}
+        setIndex={setIndex}
       />
       <div>
         <button onClick={skipHandler} className="next-btn">

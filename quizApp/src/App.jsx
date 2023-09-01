@@ -4,7 +4,7 @@ import QuestionCard from "./components/questionCard/QuestionCard";
 import axios from "axios";
 import { useEffect } from "react";
 import QuestionList from "./components/questionList/QuestionList";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import Menu from "./components/menu/Menu";
 import Score from "./components/score/Score";
 
@@ -12,6 +12,9 @@ function App() {
   const [questionList, setQuestionList] = useState([]);
   const [shuffledList, setShuffledList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isGameOver, setIsGameOver] = useState(false);
+  const [lastScore, setLastScore] = useState();
+  // const [lastIndex, setLastIndex] = useState();
 
   const shuffleArray = (array) => {
     return [...array].sort(() => Math.random() - 0.5);
@@ -70,8 +73,18 @@ function App() {
   useEffect(() => {
     fetchApi();
   }, []);
-  const handleScorePage = (finalScore, finalIndex) => {
+  const handleScorePage = (lastScore, lastIndex) => {
+    setLastScore(lastScore);
     // console.log(`finalScore: ${finalScore}  finalIndex: ${finalIndex} `);
+    if (questionList.length > 0) {
+      setIsGameOver(lastIndex + 1 === questionList.length);
+    }
+    console.log(lastIndex, questionList.length);
+    console.log(isGameOver);
+  };
+
+  const menuButtonClicked = () => {
+    window.location.href = "http://localhost:5173";
   };
   return (
     <>
@@ -80,7 +93,12 @@ function App() {
         <Route
           path="/quiz"
           element={
-            isLoading ? (
+            isGameOver ? (
+              <Score
+                lastScore={lastScore}
+                menuButtonClicked={menuButtonClicked}
+              />
+            ) : isLoading ? (
               <h1 className="loading-text">Loading...</h1>
             ) : (
               <QuestionCard
@@ -91,8 +109,17 @@ function App() {
             )
           }
         />
-        <Route path="/scorePage" element={<Score />} />
+        {/* <Route path="/scorePage" element={isGameOver === true && } /> */}
       </Routes>
+      {/* {isGameOver && (
+        <>
+          {" "}
+          <p>asdasd</p>
+          <Link to="/scorePage">
+            <button className="start-btn">Show My Score</button>
+          </Link>
+        </>
+      )} */}
     </>
   );
 }

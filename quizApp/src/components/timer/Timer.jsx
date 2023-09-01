@@ -44,7 +44,7 @@ function MyTimer({
     <progress
       id="progress-bar"
       value={isTimeOver ? res() : seconds}
-      max="10"
+      max="30"
     ></progress>
   );
 }

@@ -8,6 +8,7 @@ function AnswerButtons({
   successful,
   unsuccessful,
   func,
+  setIndex,
 }) {
   const trueAnswer = question.correct_answer;
 
@@ -18,30 +19,32 @@ function AnswerButtons({
     e.target.value == trueAnswer
       ? setTimeout(successful, 3000)
       : setTimeout(unsuccessful, 3000);
+    // index == 10 && setIndex(0), (<Score />);
   };
   useEffect(() => {
     setSelectedAnswer("");
   }, [shuffled]);
   return (
     <>
-      {shuffled.map((choice, i) => {
-        return (
-          <button
-            onClick={answerCheck}
-            className={
-              selectedAnswer != choice
-                ? "answer-choice"
-                : choice == trueAnswer
-                ? "true-answer answer-choice"
-                : "false-answer answer-choice"
-            }
-            value={choice}
-            key={i}
-          >
-            {choice}
-          </button>
-        );
-      })}
+      {index < 10 &&
+        shuffled.map((choice, i) => {
+          return (
+            <button
+              onClick={answerCheck}
+              className={
+                selectedAnswer != choice
+                  ? "answer-choice"
+                  : choice == trueAnswer
+                  ? "true-answer answer-choice"
+                  : "false-answer answer-choice"
+              }
+              value={choice}
+              key={i}
+            >
+              {choice}
+            </button>
+          );
+        })}
     </>
   );
 }
