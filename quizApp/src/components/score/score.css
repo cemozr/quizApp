@@ -34,3 +34,11 @@ h2 {
 .score-page-container:hover {
   box-shadow: 2px 2px 20px #614bc3;
 }
+@media (max-width: 767.98px) {
+  .score-page-container {
+    width: 60vw;
+  }
+  .menu-btn {
+    width: 50vw;
+  }
+}

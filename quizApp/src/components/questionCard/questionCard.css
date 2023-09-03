@@ -32,3 +32,8 @@
   font-weight: bolder;
   margin-top: 10px;
 }
+@media (max-width: 767.98px) {
+  .question-main-container {
+    width: 60vw;
+  }
+}

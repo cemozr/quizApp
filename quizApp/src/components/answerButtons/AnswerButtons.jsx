@@ -11,15 +11,13 @@ function AnswerButtons({
   setIndex,
 }) {
   const trueAnswer = question.correct_answer;
-
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const answerCheck = (e) => {
     if (selectedAnswer != "") return;
     setSelectedAnswer(e.target.value);
     e.target.value == trueAnswer
-      ? setTimeout(successful, 3000)
-      : setTimeout(unsuccessful, 3000);
-    // index == 10 && setIndex(0), (<Score />);
+      ? setTimeout(successful, 2000)
+      : setTimeout(unsuccessful, 2000);
   };
   useEffect(() => {
     setSelectedAnswer("");

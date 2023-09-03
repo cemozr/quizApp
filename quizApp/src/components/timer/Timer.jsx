@@ -10,7 +10,6 @@ function MyTimer({
   notifier,
 }) {
   const [isTimeOver, setIsTimeOver] = useState(false);
-
   const {
     totalSeconds,
     seconds,
@@ -29,7 +28,6 @@ function MyTimer({
         console.warn("onExpire called"),
         unsuccessful(),
         restart(expiryTimestamp);
-      // console.log(seconds);
     },
   });
 

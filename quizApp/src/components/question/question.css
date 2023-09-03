@@ -28,3 +28,8 @@
   cursor: pointer;
   box-shadow: 4px 4px #614bc3;
 }
+@media (max-width: 767.98px) {
+  .answer-choice {
+    width: 60vw;
+  }
+}

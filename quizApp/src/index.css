@@ -67,12 +67,9 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
-html,
-body {
+html {
   margin: 0;
   height: 100%;
-}
-body {
   display: flex;
   justify-content: center;
   align-items: center;

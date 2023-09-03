@@ -29,3 +29,9 @@ h1 {
   cursor: pointer;
   box-shadow: 4px 4px #614bc3;
 }
+@media (max-width: 767.98px) {
+  .menu-container {
+    width: 50vw;
+    text-align: center;
+  }
+}

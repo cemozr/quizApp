@@ -14,7 +14,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [lastScore, setLastScore] = useState();
-  // const [lastIndex, setLastIndex] = useState();
 
   const shuffleArray = (array) => {
     return [...array].sort(() => Math.random() - 0.5);
@@ -59,10 +58,9 @@ function App() {
 
         let arr = [...dt.incorrect_answers, dt.correct_answer];
         newShuffledList = [...newShuffledList, shuffleArray(arr)];
-        //newShuffledList = [["hp","dell","monster","casper"], ["2021","2022","1998","9122"]]
       });
       setShuffledList(newShuffledList);
-      // console.log(response.results);
+
       setQuestionList(response.results);
       setIsLoading(false);
     } catch (error) {
@@ -75,7 +73,7 @@ function App() {
   }, []);
   const handleScorePage = (lastScore, lastIndex) => {
     setLastScore(lastScore);
-    // console.log(`finalScore: ${finalScore}  finalIndex: ${finalIndex} `);
+
     if (questionList.length > 0) {
       setIsGameOver(lastIndex + 1 === questionList.length);
     }
@@ -84,7 +82,7 @@ function App() {
   };
 
   const menuButtonClicked = () => {
-    window.location.href = "http://localhost:5173";
+    window.location.href = "http://localhost:5173/";
   };
   return (
     <>
@@ -109,17 +107,7 @@ function App() {
             )
           }
         />
-        {/* <Route path="/scorePage" element={isGameOver === true && } /> */}
       </Routes>
-      {/* {isGameOver && (
-        <>
-          {" "}
-          <p>asdasd</p>
-          <Link to="/scorePage">
-            <button className="start-btn">Show My Score</button>
-          </Link>
-        </>
-      )} */}
     </>
   );
 }
